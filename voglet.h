@@ -11,12 +11,10 @@ class CVoglet
 private:
     tinyxml2::XMLDocument doc;
     std::map<long, CEntry*> entries;
-    long count=0;
 public:
-    CVoglet(std::string sFilename);
+    CVoglet(QString sFilename);
     long getCount(void);
     CEntry *getEntry(long nr);
     CEntry *getEntryByRandom(void);
 };
 #endif
-

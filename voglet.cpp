@@ -1,31 +1,32 @@
 #include <map>
 #include <time.h>
 #include <stdlib.h>
+#include <QtXml>
 #include "voglet.h"
 
-CVoglet::CVoglet(std::string sFilename)
+CVoglet::CVoglet(QString sFilename)
 {
-   tinyxml2::XMLNode *node;
-   std::string s;
+   QDomDocument doc;
+   QFile file(sFilename);
+   file.open(QIODevice::ReadOnly);
+   doc.setContent(&file);
+   file.close();
 
-   int i=doc.LoadFile(sFilename.c_str());
-   if (i==0)
+   QDomElement docElem = doc.documentElement();
+   QDomNodeList nodeList = docElem.elementsByTagName("entry");
+   if (nodeList.count() > 0)
    {
-      tinyxml2::XMLElement *el = doc.FirstChildElement("voglet")->FirstChildElement("entry");
-      while (el)
-      {
-         CEntry *entry = new CEntry();
-
-         node = el->FirstChildElement("word")->FirstChild();
-         entry->word = node->Value();
-         node = el->FirstChildElement("translation")->FirstChild();
-         entry->translation = node->Value();
-
-         this->entries.insert(std::pair<long,CEntry*>(count++,entry));
-
-         el = el->NextSiblingElement("entry");
-      }
+       for(int i = 0;i < nodeList.count(); i++)
+       {
+           QString word = nodeList.at(i).toElement().elementsByTagName("word").at(0).firstChild().toText().toCharacterData().data();
+           QString translation = nodeList.at(i).toElement().elementsByTagName("translation").at(0).firstChild().toText().toCharacterData().data();
+           CEntry *entry = new CEntry();
+           entry->word = word;
+           entry->translation = translation;
+           this->entries.insert(std::pair<long,CEntry*>(i,entry));
+       }
    }
+
    qsrand( time(NULL) );
 }
 

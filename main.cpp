@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    CVoglet *v = new CVoglet("file.xml");
+    CVoglet *v = new CVoglet(QString("file.xml"));
 
     CEntry *entry;
     entry = v->getEntryByRandom();
