@@ -1,15 +1,14 @@
 #ifndef vogletH
 #define vogletH
 
-#include <string>
-#include <map>
 #include <QtXml>
+#include <QMap>
 #include "entry.h"
 
 class CVoglet
 {
 private:
-    std::map<long, CEntry*> entries;
+    QMap<long, CEntry*> entries;
     QString getXmlElementText(QDomElement element, QString tag);
 public:
     CVoglet(QString sFilename);

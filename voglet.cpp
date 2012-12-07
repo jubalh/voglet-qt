@@ -29,7 +29,7 @@ CVoglet::CVoglet(QString sFilename)
                    s = getXmlElementText(nodeList.at(i).toElement(),"translation");
                    entry->translation = s;
 
-                   this->entries.insert(std::pair<long,CEntry*>(i,entry));
+                   this->entries.insert(i,entry);
                }
            }
        }
@@ -62,12 +62,12 @@ long CVoglet::getCount(void)
 CEntry *CVoglet::getEntry(long nr)
 {
    CEntry *e=NULL;
-   for( std::map<long,CEntry*>::iterator i=entries.begin(); i!=entries.end(); ++i)
+   for( QMap<long,CEntry*>::iterator i=entries.begin(); i!=entries.end(); ++i)
    {
-      if ( (*i).first == nr )
+      if ( i.key() == nr )
       {
-        e = (*i).second;
-         break;
+          e = i.value();
+          break;
       }
    }
    return e;
@@ -76,12 +76,12 @@ CEntry *CVoglet::getEntry(long nr)
 CEntry *CVoglet::getEntryByRandom(void)
 {
     int count = getCount();
-   CEntry *e = NULL;
+    CEntry *e = NULL;
 
-   if ( count > 0 )
-   {
-    int t = qrand() % count;
-       e = getEntry( t );
-   }
+    if ( count > 0 )
+    {
+        int t = qrand() % count;
+        e = getEntry( t );
+    }
     return e;
 }
