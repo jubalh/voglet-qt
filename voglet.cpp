@@ -1,33 +1,57 @@
 #include <map>
 #include <time.h>
 #include <stdlib.h>
-#include <QtXml>
 #include "voglet.h"
 
 CVoglet::CVoglet(QString sFilename)
 {
    QDomDocument doc;
    QFile file(sFilename);
-   file.open(QIODevice::ReadOnly);
-   doc.setContent(&file);
-   file.close();
 
-   QDomElement docElem = doc.documentElement();
-   QDomNodeList nodeList = docElem.elementsByTagName("entry");
-   if (nodeList.count() > 0)
+   if ( file.exists() )
    {
-       for(int i = 0;i < nodeList.count(); i++)
+       file.open(QIODevice::ReadOnly);
+       if ( doc.setContent(&file) )
        {
-           QString word = nodeList.at(i).toElement().elementsByTagName("word").at(0).firstChild().toText().toCharacterData().data();
-           QString translation = nodeList.at(i).toElement().elementsByTagName("translation").at(0).firstChild().toText().toCharacterData().data();
-           CEntry *entry = new CEntry();
-           entry->word = word;
-           entry->translation = translation;
-           this->entries.insert(std::pair<long,CEntry*>(i,entry));
+           file.close();
+
+           QDomElement docElem = doc.documentElement();
+           QDomNodeList nodeList = docElem.elementsByTagName("entry");
+           if (nodeList.count() > 0)
+           {
+               for(int i = 0;i < nodeList.count(); i++)
+               {
+                   QString s;
+                   CEntry *entry = new CEntry();
+
+                   s = getXmlElementText(nodeList.at(i).toElement(),"word");
+                   entry->word = s;
+                   s = getXmlElementText(nodeList.at(i).toElement(),"translation");
+                   entry->translation = s;
+
+                   this->entries.insert(std::pair<long,CEntry*>(i,entry));
+               }
+           }
        }
    }
 
    qsrand( time(NULL) );
+}
+
+QString CVoglet::getXmlElementText(QDomElement element, QString tag)
+{
+    QString r;
+    QDomNode n = element.elementsByTagName(tag).at(0);
+    if (!n.isNull())
+    {
+        QDomNode child = n.firstChild();
+        if ( !child.isNull() && child.isText() )
+        {
+            if ( child.toText().isCharacterData() )
+                r = child.toText().toCharacterData().data();
+        }
+    }
+    return r;
 }
 
 long CVoglet::getCount(void)

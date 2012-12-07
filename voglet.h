@@ -3,14 +3,14 @@
 
 #include <string>
 #include <map>
-#include "tinyxml2.h"
+#include <QtXml>
 #include "entry.h"
 
 class CVoglet
 {
 private:
-    tinyxml2::XMLDocument doc;
     std::map<long, CEntry*> entries;
+    QString getXmlElementText(QDomElement element, QString tag);
 public:
     CVoglet(QString sFilename);
     long getCount(void);
