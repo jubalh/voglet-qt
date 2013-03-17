@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include "voglet.h"
 
-CVoglet::CVoglet(QString sFilename)
+CVoglet::CVoglet(CConfig *config)
 {
    QDomDocument doc;
-   QFile file(sFilename);
+   QFile file( config->getFilename() );
 
    if ( file.exists() )
    {
@@ -35,6 +35,7 @@ CVoglet::CVoglet(QString sFilename)
        }
    }
 
+   this->config = config;
    qsrand( time(NULL) );
 }
 
