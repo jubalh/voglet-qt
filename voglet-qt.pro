@@ -14,9 +14,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     voglet.cpp \
+    config.cpp \
+    xmlhelper.cpp
 
 HEADERS  += mainwindow.h \
     voglet.h \
-    entry.h
+    entry.h \
+    config.h \
+    xmlhelper.h
 
 FORMS    += mainwindow.ui

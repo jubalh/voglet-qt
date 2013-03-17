@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "mainwindow.h"
+#include "config.h"
 #include "voglet.h"
 #include "entry.h"
 
@@ -7,7 +8,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    CVoglet *v = new CVoglet(QString("file.xml"));
+    CConfig *conf = new CConfig();
+    if ( !conf->load() )
+        return -1;
+
+    CVoglet *v = new CVoglet( conf->getFilename() );
 
     CEntry *entry;
     entry = v->getEntryByRandom();

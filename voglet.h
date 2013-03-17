@@ -4,12 +4,12 @@
 #include <QtXml>
 #include <QMap>
 #include "entry.h"
+#include "xmlhelper.h"
 
-class CVoglet
+class CVoglet : XmlHelper
 {
 private:
     QMap<long, CEntry*> entries;
-    QString getXmlElementText(QDomElement element, QString tag);
 public:
     CVoglet(QString sFilename);
     long getCount(void);
