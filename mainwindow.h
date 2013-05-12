@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "entry.h"
+#include "config.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +17,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void setEntry(CEntry *entry);
-    
+    void setConfig(CConfig *config);
 private:
     Ui::MainWindow *ui;
+    CConfig *config;
 };
 
 #endif // MAINWINDOW_H

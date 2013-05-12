@@ -16,12 +16,21 @@ bool CConfig::load()
         file.open(QIODevice::ReadOnly);
         if ( doc.setContent(&file) )
         {
+            QString sDirection;
             file.close();
 
             QDomElement docElem = doc.documentElement();
 
             this->file = getXmlElementText(docElem, "file");
-            this->direction = getXmlElementText(docElem, "direction");
+
+            sDirection = getXmlElementText(docElem, "direction");
+            if (sDirection.compare("both", Qt::CaseInsensitive))
+                this->direction = VOGLET_CONFIG_DIRECTION_BOTH;
+            else if (sDirection.compare("translation", Qt::CaseInsensitive))
+                this->direction = VOGLET_CONFIG_DIRECTION_TRANSLATION;
+            else if (sDirection.compare("word", Qt::CaseInsensitive))
+                this->direction == VOGLET_CONFIG_DIRECTION_WORD;
+
             return true;
         }
     }
@@ -33,7 +42,7 @@ QString CConfig::getFilename()
     return this->file;
 }
 
-QString CConfig::getDirection()
+VOGLET_CONFIG_DIRECTION CConfig::getDirection()
 {
     return this->direction;
 }
