@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     if ( !conf->load() )
         return -1;
 
-    CVoglet *v = new CVoglet( conf);
+    CVoglet *v = new CVoglet(conf);
 
     CEntry *entry;
     entry = v->getEntryByRandom();
