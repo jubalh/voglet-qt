@@ -11,16 +11,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = voglet-qt
 TEMPLATE = app
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    voglet.cpp \
-    config.cpp \
-    xmlhelper.cpp
+SOURCES += src/main.cpp\
+       src/mainwindow.cpp \
+    src/voglet.cpp \
+    src/config.cpp \
+    src/xmlhelper.cpp
 
-HEADERS  += mainwindow.h \
-    voglet.h \
-    entry.h \
-    config.h \
-    xmlhelper.h
+HEADERS  += src/mainwindow.h \
+    src/voglet.h \
+    src/entry.h \
+    src/config.h \
+    src/xmlhelper.h
 
 FORMS    += mainwindow.ui
