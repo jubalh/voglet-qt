@@ -12,8 +12,8 @@ Clone it via `git clone https://github.com/jubalh/voglet-qt.git`
 Open the `voglet-qt.pro` file with [Qt Creator](http://en.wikipedia.org/wiki/Qt_Creator) and build it.
 
 If you don't want to use Qt Creator, you can use qmake:
-`> qmake -o Makefile voglet-qt.pro
-> make`
+`> qmake -o Makefile voglet-qt.pro`
+`> make`
 
 Configuration
 =============
