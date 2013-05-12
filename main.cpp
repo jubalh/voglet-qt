@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     entry = v->getEntryByRandom();
 
     MainWindow w;
+    w.setConfig(conf);
     w.setEntry(entry);
     w.show();
     return a.exec();

@@ -21,6 +21,8 @@ public:
 private:
     Ui::MainWindow *ui;
     CConfig *config;
+    void setTranslation(CEntry *entry);
+    void setWord(CEntry *entry);
 };
 
 #endif // MAINWINDOW_H
