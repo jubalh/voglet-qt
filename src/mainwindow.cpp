@@ -8,8 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::Popup);
+
     ui->leWord->installEventFilter(this);
     ui->leTranslation->installEventFilter(this);
+
     this->config = 0;
 }
 
